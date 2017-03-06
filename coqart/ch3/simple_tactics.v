@@ -33,6 +33,7 @@ Section taken_to_the_extreme.
    * Thanks Curry and Howard!
    *)
   Theorem delta : (P -> P -> Q) -> P -> Q.
+  (* Note that inline proofs are not recommended by Bertot *)
   Proof (fun (H:P->P->Q)(p:P) => H p p).
 End taken_to_the_extreme.
 
