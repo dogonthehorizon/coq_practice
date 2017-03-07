@@ -41,3 +41,39 @@ Print imp_trans.
 Print imp_trans'.
 Print L1.
 Print delta.
+
+(* Regular ol' tactics *)
+Theorem compose_example : (P -> Q -> R) -> (P -> Q) -> (P -> R).
+Proof.
+  intros H H' p.
+  apply H.
+  apply p.
+  apply H'.
+  assumption.
+Qed.
+
+(* 'Tacticals', or, higher-order tactics. *)
+Theorem compose_example' : (P -> Q -> R) -> (P -> Q) -> (P -> R).
+Proof.
+  intros H H' p.
+  apply H;[assumption | apply H'; assumption].
+Qed.
+
+(* Regular ol' tactics *)
+Lemma L3 : (P->Q)->(P->R)->(P->Q->R->T)->P->T.
+Proof.
+  intros H H0 H1 p.
+  apply H1.
+  assumption.
+  apply H.
+  assumption.
+  apply H0.
+  assumption.
+Qed.
+
+(* 'Tacticals', or, higher-order tactics. Featuring ID. *)
+Lemma L3' : (P->Q)->(P->R)->(P->Q->R->T)->P->T.
+Proof.
+  intros H H0 H1 p.
+  apply H1;[idtac | apply H | apply H0]; assumption.
+Qed.
